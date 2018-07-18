@@ -1,4 +1,4 @@
-import* as React from 'react';
+import * as React from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import * as LoginActions from '../actions';
@@ -8,29 +8,30 @@ const form = reduxForm({
 });
 
 class Login extends React.Component {
-  public handleFormSubmit(formProps:any) {
+  public handleFormSubmit(formProps: any) {
     const { loginUser } = this.props as any;
     loginUser(formProps);
   }
 
   public renderAlert() {
     const { errorMessage } = this.props as any;
-    if(errorMessage) {
+    if (errorMessage) {
       return (
         <div>
           <span><strong>Error!</strong> {errorMessage}</span>
         </div>
       );
     }
-    return <div/>
+    return <div />
   }
 
   public render() {
     const { handleSubmit } = this.props as any;
+    const submitFuntion = handleSubmit(this.handleFormSubmit.bind(this));
     return (
       <div>
-        <form onSubmit={handleSubmit(() => this.handleFormSubmit(this.props))}>
-        {this.renderAlert()}
+        <form onSubmit={submitFuntion}>
+          {this.renderAlert()}
           <div>
             <label>Email</label>
             <Field name="email" className="form-control" component="input" type="text" />

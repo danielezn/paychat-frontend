@@ -55,9 +55,10 @@ class Register extends React.Component<any, any> {
 
   public render() {
     const { handleSubmit } = this.props;
+    // tslint:disable-next-line:jsx-no-bind
+    const submitFunction = handleSubmit(this.handleFormSubmit.bind(this));
     return (
-      // tslint:disable-next-line:jsx-no-bind
-      <form onSubmit={handleSubmit(this.handleFormSubmit.bind(this))}>
+      <form onSubmit={submitFunction}>
       {this.renderAlert()}
         <div className="row">
           <div className="col-md-12">
